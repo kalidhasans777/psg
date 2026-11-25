@@ -1,0 +1,29 @@
+# Python / Backend
+backend/.venv/
+backend/venv/
+backend/.pytest_cache/
+backend/__pycache__/
+backend/*.py[cod]
+backend/medora_dev.db
+backend/medora_dev.db-shm
+backend/medora_dev.db-wal
+backend/uploads/*
+!backend/uploads/.gitkeep
+
+# Frontend
+frontend/node_modules/
+frontend/dist/
+frontend/*.tsbuildinfo
+
+# Environment variables & secrets
+.env
+*.env
+backend/.env
+frontend/.env
+!*.env.example
+
+# OS / Editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
