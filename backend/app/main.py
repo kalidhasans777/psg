@@ -36,44 +36,4 @@ app = FastAPI(
 )
 
 app.state.limiter = limiter
-app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
-
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=settings.cors_origins_list,
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
-
-
-@app.middleware("http")
-async def security_headers_middleware(request: Request, call_next):
-    response = await call_next(request)
-    response.headers["X-Content-Type-Options"] = "nosniff"
-    response.headers["X-Frame-Options"] = "DENY"
-    response.headers["Referrer-Policy"] = "strict-origin-when-cross-origin"
-    return response
-
-
-@app.get("/api/health", tags=["System"])
-def health_check():
-    return {
-        "status": "healthy",
-        "application": settings.APP_NAME,
-        "tagline": settings.APP_TAGLINE,
-        "database_dialect": "postgresql" if settings.is_postgres else "sqlite-dev-fallback",
-        "gemini_configured": bool(settings.GEMINI_API_KEY),
-        "cloud_voice_configured": bool(settings.GOOGLE_CLOUD_SPEECH_API_KEY or settings.AZURE_SPEECH_KEY),
-    }
-
-
-app.include_router(auth.router)
-app.include_router(patients.router)
-app.include_router(visits.router)
-app.include_router(voice.router)
-app.include_router(reports.router)
-app.include_router(ai.router)
-app.include_router(doctor.router)
-app.include_router(admin.router)
-app.include_router(appointments.router)
+app.add_exception_
